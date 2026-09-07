@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import clientPromise from "@/lib/mongodb";
+import getClientPromise from "@/lib/mongodb";
 
 export async function POST(request: NextRequest) {
   const { id } = await request.json();
@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "id가 필요합니다" }, { status: 400 });
   }
 
-  const client = await clientPromise;
+  const client = await getClientPromise();
   const db = client.db("linknamu");
 
   await db
